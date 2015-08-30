@@ -54,4 +54,20 @@ public class UncheckingTest {
 		map.put(3, "C");
 		map.forEach(Unchecking.biConsumer((k, v) -> System.out.println("k = " + k + ", v= " + v)));
 	}
+
+	@Test(expected = UncheckedException.class)
+	public void biFunction_given_biFunction_that_throws_rethrows_exception() throws Exception {
+		Map<Integer, String> map = new HashMap<>();
+		map.put(1, "A");
+		map.computeIfPresent(1, Unchecking.biFunction((k, v) -> {
+			throw new ClassNotFoundException();
+		}));
+	}
+
+	@Test
+	public void biFunction_given_biFunction_that_doesNot_throw_does_nothing() throws Exception {
+		Map<Integer, String> map = new HashMap<>();
+		map.put(1, "A");
+		map.computeIfPresent(1, Unchecking.biFunction((k, v) -> k + v));
+	}
 }
