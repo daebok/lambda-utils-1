@@ -70,4 +70,17 @@ public class UncheckingTest {
 		map.put(1, "A");
 		map.computeIfPresent(1, Unchecking.biFunction((k, v) -> k + v));
 	}
+	
+	@Test(expected = UncheckedException.class)
+	public void biPredicate_given_biPredicate_that_throws_rethrows_exception() throws Exception {
+		TestingFunctions.biPredicate(
+				Unchecking.biPredicate((t, u) -> { throw new ClassNotFoundException(); }))
+				.test("one", "two");
+	}
+
+	@Test
+	public void biPredicate_given_biPredicate_that_doesNot_throw_does_nothing() throws Exception {
+		TestingFunctions.biPredicate(Unchecking.biPredicate((t, u) -> true ))
+				.test("one", "two");
+	}
 }
