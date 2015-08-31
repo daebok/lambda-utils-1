@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.rsromanojr.lambdautils.util.function;
+package com.lambdautils.util.function;
 
 import java.util.function.BiPredicate;
 

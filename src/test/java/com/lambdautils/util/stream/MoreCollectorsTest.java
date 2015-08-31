@@ -21,7 +21,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * 
  */
-package com.rsromanojr.lambdautils.util.stream;
+package com.lambdautils.util.stream;
 
 import static com.lambdautils.util.stream.MoreCollectors.toImmutableList;
 import static com.lambdautils.util.stream.MoreCollectors.toImmutableMap;

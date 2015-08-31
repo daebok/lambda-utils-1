@@ -21,7 +21,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * 
  */
-package com.rsromanojr.lambdautils.util.function;
+package com.lambdautils.util.function;
 
 import java.util.HashMap;
 import java.util.Map;
