@@ -25,6 +25,7 @@ package com.lambdautils.util.function;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import org.junit.Test;
 
@@ -82,5 +83,45 @@ public class RethrowingTest {
 	public void biPredicate_given_biPredicate_that_doesNot_throw_does_nothing() throws Exception {
 		TestingFunctions.biPredicate(Rethrowing.biPredicate((t, u) -> true ))
 				.test("one", "two");
+	}
+
+	@Test(expected = ClassNotFoundException.class)
+	public void binaryOperator_given_binaryOperator_that_throws_rethrows_exception() throws Exception {
+		TestingFunctions.binaryOperator(
+				Rethrowing.binaryOperator((t, u) -> { 
+					throw new ClassNotFoundException(); 
+					}))
+				.apply("one", "two");
+	}
+
+	@Test
+	public void binaryOperator_given_binaryOperator_that_doesNot_throw_does_nothing() throws Exception {
+		TestingFunctions.binaryOperator(Rethrowing.binaryOperator((t,u) -> true ))
+				.apply("one", "two");
+	}
+
+	@Test(expected = ClassNotFoundException.class)
+	public void booleanSupplier_given_booleanSupplier_that_throws_rethrows_exception() throws Exception {
+		TestingFunctions.booleanSupplier(
+				Rethrowing.booleanSupplier(() -> { 
+					throw new ClassNotFoundException(); 
+					})).getAsBoolean();
+	}
+
+	@Test
+	public void booleanSupplier_given_booleanSupplier_that_doesNot_throw_does_nothing() throws Exception {
+		TestingFunctions.booleanSupplier(Rethrowing.booleanSupplier(() -> true )).getAsBoolean();
+	}
+
+	@Test(expected = ClassNotFoundException.class)
+	public void consumer_given_consumer_that_throws_rethrows_exception() throws Exception {
+		Stream.of("one", "two", "three").forEach((Rethrowing.consumer(t -> {
+			throw new ClassNotFoundException();
+		})));
+	}
+
+	@Test
+	public void consumer_given_consumer_that_doesNot_throw_does_nothing() throws Exception {
+		Stream.of("one", "two", "three").forEach((Rethrowing.consumer(System.out::println)));
 	}
 }
