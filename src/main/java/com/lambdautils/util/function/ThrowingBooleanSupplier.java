@@ -23,6 +23,8 @@
  */
 package com.lambdautils.util.function;
 
+import java.util.function.BooleanSupplier;
+
 /**
  * @author rsromanojr
  *
@@ -30,4 +32,8 @@ package com.lambdautils.util.function;
 @FunctionalInterface
 public interface ThrowingBooleanSupplier<E extends Exception> {
 	boolean getAsBoolean() throws E;
+
+	static <E extends Exception> ThrowingBooleanSupplier<E> wrap(final BooleanSupplier toWrap) {
+		return () -> toWrap.getAsBoolean();
+	}
 }

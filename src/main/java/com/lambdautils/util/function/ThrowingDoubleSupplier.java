@@ -23,6 +23,8 @@
  */
 package com.lambdautils.util.function;
 
+import java.util.function.DoubleSupplier;
+
 /**
  * @author rsromanojr
  *
@@ -30,4 +32,8 @@ package com.lambdautils.util.function;
 @FunctionalInterface
 public interface ThrowingDoubleSupplier<E extends Exception> {
 	double getAsDouble() throws E;
+
+	static <E extends Exception> ThrowingDoubleSupplier<E> wrap(final DoubleSupplier toWrap) {
+		return () -> toWrap.getAsDouble();
+	}
 }

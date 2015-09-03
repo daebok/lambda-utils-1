@@ -23,6 +23,8 @@
  */
 package com.lambdautils.util.function;
 
+import java.util.function.DoubleToIntFunction;
+
 /**
  * @author rsromanojr
  *
@@ -30,4 +32,8 @@ package com.lambdautils.util.function;
 @FunctionalInterface
 public interface ThrowingDoubleToIntFunction<E extends Exception> {
 	int applyAsInt(double value) throws E;
+
+	static <E extends Exception> ThrowingDoubleToIntFunction<E> wrap(final DoubleToIntFunction toWrap) {
+		return t -> toWrap.applyAsInt(t);
+	}
 }

@@ -23,6 +23,8 @@
  */
 package com.lambdautils.util.function;
 
+import java.util.function.Function;
+
 /**
  * @author rsromanojr
  *
@@ -30,4 +32,8 @@ package com.lambdautils.util.function;
 @FunctionalInterface
 public interface ThrowingFunction<T, R, E extends Exception> {
 	R apply(T t) throws E;
+
+	static <T, R, E extends Exception> ThrowingFunction<T, R, E> wrap(final Function<T, R> toWrap) {
+		return t -> toWrap.apply(t);
+	}
 }

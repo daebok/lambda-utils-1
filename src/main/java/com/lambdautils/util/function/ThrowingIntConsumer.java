@@ -23,6 +23,8 @@
  */
 package com.lambdautils.util.function;
 
+import java.util.function.IntConsumer;
+
 /**
  * @author rsromanojr
  *
@@ -30,4 +32,8 @@ package com.lambdautils.util.function;
 @FunctionalInterface
 public interface ThrowingIntConsumer<E extends Exception> {
 	void accept(int value) throws E;
+
+	static <E extends Exception> ThrowingIntConsumer<E> wrap(final IntConsumer toWrap) {
+		return t -> toWrap.accept(t);
+	}
 }

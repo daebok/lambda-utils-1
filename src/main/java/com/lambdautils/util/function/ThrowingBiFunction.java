@@ -23,10 +23,16 @@
  */
 package com.lambdautils.util.function;
 
+import java.util.function.BiFunction;
+
 /**
  * @author rsromanojr
  */
 @FunctionalInterface
 public interface ThrowingBiFunction<T, U, R, E extends Exception> {
 	R apply(T t, U u) throws E;
+
+	static <T, U, R, E extends Exception> ThrowingBiFunction<T, U, R, E> wrap(final BiFunction<T, U, R> toWrap) {
+		return (t, u) -> toWrap.apply(t, u);
+	}
 }

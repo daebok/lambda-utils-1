@@ -23,6 +23,8 @@
  */
 package com.lambdautils.util.function;
 
+import java.util.function.DoubleToLongFunction;
+
 /**
  * @author rsromanojr
  *
@@ -30,4 +32,8 @@ package com.lambdautils.util.function;
 @FunctionalInterface
 public interface ThrowingDoubleToLongFunction<E extends Exception> {
 	long applyAsLong(double value) throws E;
+
+	static <E extends Exception> ThrowingDoubleToLongFunction<E> wrap(final DoubleToLongFunction toWrap) {
+		return t -> toWrap.applyAsLong(t);
+	}
 }

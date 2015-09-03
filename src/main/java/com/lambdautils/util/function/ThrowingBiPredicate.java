@@ -23,6 +23,8 @@
  */
 package com.lambdautils.util.function;
 
+import java.util.function.BiPredicate;
+
 /**
  * @author rsromanojr
  *
@@ -30,4 +32,8 @@ package com.lambdautils.util.function;
 @FunctionalInterface
 public interface ThrowingBiPredicate<T, U, E extends Exception> {
 	boolean test(T t, U u) throws E;
+
+	static <T, U, E extends Exception> ThrowingBiPredicate<T, U, E> wrap(final BiPredicate<T, U> toWrap) {
+		return (t, u) -> toWrap.test(t, u);
+	}
 }

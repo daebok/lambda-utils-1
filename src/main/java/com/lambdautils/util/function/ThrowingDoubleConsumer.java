@@ -23,6 +23,8 @@
  */
 package com.lambdautils.util.function;
 
+import java.util.function.DoubleConsumer;
+
 /**
  * @author rsromanojr
  *
@@ -30,4 +32,8 @@ package com.lambdautils.util.function;
 @FunctionalInterface
 public interface ThrowingDoubleConsumer<E extends Exception> {
 	void accept(double value) throws E;
+
+	static <E extends Exception> ThrowingDoubleConsumer<E> wrap(final DoubleConsumer toWrap) {
+		return t -> toWrap.accept(t);
+	}
 }

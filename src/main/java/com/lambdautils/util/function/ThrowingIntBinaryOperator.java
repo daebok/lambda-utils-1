@@ -23,6 +23,8 @@
  */
 package com.lambdautils.util.function;
 
+import java.util.function.IntBinaryOperator;
+
 /**
  * @author rsromanojr
  *
@@ -30,4 +32,8 @@ package com.lambdautils.util.function;
 @FunctionalInterface
 public interface ThrowingIntBinaryOperator<E extends Exception> {
 	int applyAsInt(int left, int right) throws E;
+
+	static <E extends Exception> ThrowingIntBinaryOperator<E> wrap(final IntBinaryOperator toWrap) {
+		return (left, right) -> toWrap.applyAsInt(left, right);
+	}
 }

@@ -23,6 +23,8 @@
  */
 package com.lambdautils.util.function;
 
+import java.util.function.DoublePredicate;
+
 /**
  * @author rsromanojr
  *
@@ -30,4 +32,8 @@ package com.lambdautils.util.function;
 @FunctionalInterface
 public interface ThrowingDoublePredicate<E extends Exception> {
 	boolean test(double value) throws E;
+
+	static <E extends Exception> ThrowingDoublePredicate<E> wrap(final DoublePredicate toWrap) {
+		return t -> toWrap.test(t);
+	}
 }

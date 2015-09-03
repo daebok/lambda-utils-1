@@ -23,6 +23,8 @@
  */
 package com.lambdautils.util.function;
 
+import java.util.function.DoubleBinaryOperator;
+
 /**
  * @author rsromanojr
  *
@@ -30,4 +32,8 @@ package com.lambdautils.util.function;
 @FunctionalInterface
 public interface ThrowingDoubleBinaryOperator<E extends Exception> {
 	double applyAsDouble(double left, double right) throws E;
+
+	static <E extends Exception> ThrowingDoubleBinaryOperator<E> wrap(final DoubleBinaryOperator toWrap) {
+		return (left, right) -> toWrap.applyAsDouble(left, right);
+	}
 }

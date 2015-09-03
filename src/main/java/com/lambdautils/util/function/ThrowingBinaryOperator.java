@@ -23,11 +23,15 @@
  */
 package com.lambdautils.util.function;
 
+import java.util.function.BinaryOperator;
+
 /**
  * @author rsromanojr
  *
  */
 @FunctionalInterface
-public interface ThrowingBinaryOperator<T, E extends Exception> extends ThrowingBiFunction<T, T, T, Exception>
-{
+public interface ThrowingBinaryOperator<T, E extends Exception> extends ThrowingBiFunction<T, T, T, Exception> {
+	static <T, E extends Exception> ThrowingBinaryOperator<T, E> wrap(BinaryOperator<T> toWrap) {
+		return (t, u) -> toWrap.apply(t, u);
+	}
 }

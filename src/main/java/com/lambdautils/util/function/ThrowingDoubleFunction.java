@@ -23,6 +23,8 @@
  */
 package com.lambdautils.util.function;
 
+import java.util.function.DoubleFunction;
+
 /**
  * @author rsromanojr
  *
@@ -30,4 +32,8 @@ package com.lambdautils.util.function;
 @FunctionalInterface
 public interface ThrowingDoubleFunction<R, E extends Exception> {
 	R apply(double value) throws E;
+
+	static <R, E extends Exception> ThrowingDoubleFunction<R, E> wrap(final DoubleFunction<R> toWrap) {
+		return t -> toWrap.apply(t);
+	}
 }

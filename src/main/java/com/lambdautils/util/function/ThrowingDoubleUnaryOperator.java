@@ -23,6 +23,8 @@
  */
 package com.lambdautils.util.function;
 
+import java.util.function.DoubleUnaryOperator;
+
 /**
  * @author rsromanojr
  *
@@ -30,4 +32,8 @@ package com.lambdautils.util.function;
 @FunctionalInterface
 public interface ThrowingDoubleUnaryOperator<E extends Exception> {
 	 double applyAsDouble(double operand) throws E;
+
+	static <E extends Exception> ThrowingDoubleUnaryOperator<E> wrap(final DoubleUnaryOperator toWrap) {
+		return t -> toWrap.applyAsDouble(t);
+	}
 }
