@@ -23,6 +23,8 @@
  */
 package com.rsromanojr.lambda.util.function;
 
+import java.util.function.BiConsumer;
+
 /**
  * @author rsromanojr
  *
@@ -30,4 +32,8 @@ package com.rsromanojr.lambda.util.function;
 @FunctionalInterface
 public interface ThrowingBiConsumer<T, U, E extends Exception> {
 	void accept(T t, U u) throws E;
+
+	static <T, U, E extends Exception> ThrowingBiConsumer<T, U, E> wrap(final BiConsumer<T, U> toWrap) {
+		return (t, u) -> toWrap.accept(t, u);
+	}
 }
